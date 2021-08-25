@@ -1,15 +1,23 @@
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-
-import Search from "./components/Search.js";
-import logo from "./images/bingo_logo.png"
+import Home from "./pages/Home.js";
+import Results from "./pages/Results";
 
 import './App.css';
 
 function App() {
   return (
     <div className="bingo-search">
-      <img src={logo} alt="Bingo logo" className="app-logo"/>
-      <Search/>
+      <Router>
+        <Switch>
+          <Route path="/">
+            <Home/>
+          </Route>
+          <Route path="/search">
+            <Results/>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
