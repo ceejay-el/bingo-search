@@ -1,0 +1,33 @@
+/* search bar*/
+.search {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputform {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    margin: 5px auto;
+}
+.inputbox {
+    border: none;
+    margin-right: 0;
+    outline: none;
+    border-radius: 50px 0 0 50px;
+    padding: 1rem;
+    width: 30rem;
+    font-size: 1rem;
+}
+.searchbtn {
+    border: none;
+    margin-left: 0;
+    padding: 1rem;
+    border-radius: 0 50px 50px 0;
+    justify-content: center;
+    background: #fff;
+}
+.searchbtn img {
+    max-width: 30px;
+    max-height: 30px;
+}
