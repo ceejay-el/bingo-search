@@ -1,2 +1,2 @@
 # bingo-search
-search engine results page
+Search engine results page
