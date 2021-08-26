@@ -1,24 +1,34 @@
 import React, {useState} from "react";
+import {useHistory} from "react-router-dom";
 
 import search_icon from "../images/search-icon.svg";
 import "./Components.css";
 
+
+/**
+ * Change state with user input inside search bar. input text is empty by default.
+ * `useHistory` helps us access the history object, which allows us to navigate to other routes using `push` and `replace` methods.
+ * 
+ * @returns search bar
+ */
 export default function Search(){
-    // change state with user input inside search bar
-    // input text is empty by default
     const [text, setText] = useState("");
+    const history = useHistory();
 
     /**
      * TODO: serve data to the user
      */
     function query(event){
         event.preventDefault();
+        
+        
+        history.push("/search");    // navigate to search results page
     }
 
     // input tag captures text and changes state
     return (
         <div className="search">
-            <form action="/" method="get" className="inputform">
+            <form action="/" method="get" className="inputform" autoComplete="off">
                 <input
                     type="text"
                     id="searchbar"
