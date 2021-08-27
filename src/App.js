@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import Home from "./pages/Home.js";
-import Results from "./pages/Results";
+import Results from "./pages/Results.js";
 
 import './App.css';
 
@@ -10,11 +10,11 @@ function App() {
     <div className="bingo-search">
       <Router>
         <Switch>
-          <Route path="/">
-            <Home/>
-          </Route>
           <Route path="/search">
             <Results/>
+          </Route>
+          <Route path="/">
+            <Home/>
           </Route>
         </Switch>
       </Router>

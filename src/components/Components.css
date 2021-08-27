@@ -1,4 +1,4 @@
-/* search bar*/
+/* ------------------- search bar ---------------------------*/
 .search {
     display: flex;
     flex-direction: column;
@@ -9,6 +9,8 @@
     flex-direction: row;
     border: none;
     margin: 5px auto;
+    border-radius: 50px;
+    box-shadow: 0 0 8px #e0eeee;
 }
 .inputbox {
     border: none;
@@ -26,8 +28,10 @@
     border-radius: 0 50px 50px 0;
     justify-content: center;
     background: #fff;
+    cursor: pointer;
 }
 .searchbtn img {
     max-width: 30px;
     max-height: 30px;
 }
+/* --------------------------------------------------------- */

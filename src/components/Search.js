@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 
+import {useStateValue} from "./StateProvider.js";
+import {actionTypes} from "./reducer.js";
 import search_icon from "../images/search-icon.svg";
 import "./Components.css";
 
@@ -12,7 +14,8 @@ import "./Components.css";
  * @returns search bar
  */
 export default function Search(){
-    const [text, setText] = useState("");
+    const [state, dispatch] = useStateValue();
+    const [input, setText] = useState("");
     const history = useHistory();
 
     /**
@@ -23,6 +26,10 @@ export default function Search(){
         
         
         history.push("/search");    // navigate to search results page
+        dispatch({
+            type: actionTypes.SET_SEARCH_TERM,
+            term: input
+        });
     }
 
     // input tag captures text and changes state
@@ -34,7 +41,7 @@ export default function Search(){
                     id="searchbar"
                     placeholder="Search"
                     className="inputbox"
-                    value={text}
+                    value={input}
                     onChange={event => {setText(event.target.value)}}
                 />
                 <button type="submit" className="searchbtn" onClick={query}>
