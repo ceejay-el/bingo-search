@@ -22,7 +22,6 @@ lib-cov
 coverage
 *.lcov
 
-<<<<<<< HEAD
 # nyc test coverage
 .nyc_output
 
@@ -103,11 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-=======
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# environment variables
-.env
->>>>>>> 1138866 (1st attempt to use fetch API to request data from serpstack API)
