@@ -15,7 +15,7 @@ import "./Components.css";
  */
 export default function Search(){
     const [state, dispatch] = useStateValue();
-    const [input, setText] = useState("");
+    const [input, setInput] = useState("");
     const history = useHistory();
 
     /**
@@ -30,6 +30,7 @@ export default function Search(){
             type: actionTypes.SET_SEARCH_TERM,
             term: input
         });
+        console.log(state);
     }
 
     // input tag captures text and changes state
@@ -42,7 +43,7 @@ export default function Search(){
                     placeholder="Search"
                     className="inputbox"
                     value={input}
-                    onChange={event => {setText(event.target.value)}}
+                    onChange={event => {setInput(event.target.value)}}
                 />
                 <button type="submit" className="searchbtn" onClick={query}>
                     <img src={search_icon} alt="Search button"/>

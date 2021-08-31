@@ -1,10 +1,20 @@
 import React from "react";
+import { useSearchEngine } from "../components/fetchAPIdata.js";
+import { useStateValue } from "../components/StateProvider.js";
 
+/**
+ * 
+ * 
+ * @returns search page
+ */
 export default function Results(){
+    const [{term}, dispatch] = useStateValue();
+    const {data} = useSearchEngine(term);
 
+    console.log(data);
     return (
-        <div style={{margin: "20%"}}>
-            I'm working on it. The site will be live in a few, I just gotta figure something out.
+        <div style={{margin: "5%"}}>
+            data
         </div>
     );
 }
