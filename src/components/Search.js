@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 
-import {useStateValue} from "./StateProvider.js";
-import {actionTypes} from "./reducer.js";
+import { bingSearchOptions, getSubscriptionKey, bingWebSearch } from "./bingSearch.js";
 import search_icon from "../images/search-icon.svg";
 import "./Components.css";
 
@@ -14,29 +13,32 @@ import "./Components.css";
  * @returns search bar
  */
 export default function Search(){
-    const [state, dispatch] = useStateValue();
     const [input, setInput] = useState("");
     const history = useHistory();
 
     /**
      * TODO: serve data to the user
      */
-    function query(event){
+    function handleSubmit(event){
         event.preventDefault();
-        
-        
+
         history.push("/search");    // navigate to search results page
-        dispatch({
-            type: actionTypes.SET_SEARCH_TERM,
-            term: input
-        });
-        console.log(state);
+
+        const searchOptions = bingSearchOptions(event);
+        const apiKey = getSubscriptionKey();
+        bingWebSearch(input, searchOptions, apiKey);
     }
 
     // input tag captures text and changes state
     return (
         <div className="search">
-            <form action="/" method="get" className="inputform" autoComplete="off">
+            <form
+                action="/"
+                method="get"
+                className="inputform"
+                autoComplete="off"
+                onSubmit={handleSubmit}
+                >
                 <input
                     type="text"
                     id="searchbar"
@@ -45,7 +47,7 @@ export default function Search(){
                     value={input}
                     onChange={event => {setInput(event.target.value)}}
                 />
-                <button type="submit" className="searchbtn" onClick={query}>
+                <button type="submit" className="searchbtn">
                     <img src={search_icon} alt="Search button"/>
                 </button>
             </form>
