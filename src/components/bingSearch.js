@@ -1,3 +1,5 @@
+import {useState, useEffect} from "react";
+
 // call APIs
 const SEARCH_API_KEY = process.env.REACT_APP_SEARCH_KEY;
 const BING_ENDPOINT = "https://api.bing.microsoft.com/v7.0/search";
@@ -26,6 +28,9 @@ export function getSubscriptionKey(){
  * 
  */
 export function bingWebSearch(query, options, key) {
+
+    const [jsobj, setJsobj] = useState(null);
+
     if (!query.trim().length) return false;
 
     // create an XMLHttpRequest object
@@ -46,7 +51,25 @@ export function bingWebSearch(query, options, key) {
     request.setRequestHeader("Accept", "application/json");
 
     // Event handler for successful response.
-    request.addEventListener("load", handleBingResponse);
+    useEffect(() => {
+        request.addEventListener("load", () => {
+            const json = this.responseText.trim();
+
+            // try to parse results object
+            try {
+                if (json.length) setJsobj(JSON.parse(json));
+            } catch (error){
+                console.log("Invalid JSON response");
+                return;
+            }
+
+            console.log(jsobj);
+            return {jsobj};
+        });
+    });
+    request.addEventListener("load", () => {
+
+    });
 
     // Event handler for errors.
     request.addEventListener("error", function() {
@@ -62,20 +85,3 @@ export function bingWebSearch(query, options, key) {
     request.send();
     return false;
 }
-
-
-function handleBingResponse() {
-    const json = this.responseText.trim();
-    var jsobj = {};
-
-    // Try to parse results object
-    try {
-        if (json.length) jsobj = JSON.parse(json);
-    } catch(error) {
-        console.log("Invalid JSON response");
-        return;
-    }
-    console.log(jsobj);
-    return;
-}
-

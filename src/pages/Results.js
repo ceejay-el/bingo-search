@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import results from "../components/response.js";
 
 /**
  * 
  * @returns search page
  */
 export default function Results(){
+    
+
 
     return (
         <div style={{margin: "2%"}}>
@@ -18,15 +19,7 @@ export default function Results(){
 
             <div className="related-search"></div>
 
-            <div className="serp">
-                {results.webPages.value.map(item => (
-                    <div className="serp-result">
-                        <a href={item.url}><h4>{item.name}</h4></a>
-                        <p className="display-url">{item.displayUrl}</p>
-                        <p className="snippet">{item.snippet}</p>
-                    </div>
-                ))}
-            </div>
+
         </div>
     );
 }
