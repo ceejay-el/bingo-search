@@ -65,6 +65,17 @@ export function bingWebSearch(query, options, key) {
 
 
 function handleBingResponse() {
-    console.log(this.responseText.trim());
+    const json = this.responseText.trim();
+    var jsobj = {};
+
+    // Try to parse results object
+    try {
+        if (json.length) jsobj = JSON.parse(json);
+    } catch(error) {
+        console.log("Invalid JSON response");
+        return;
+    }
+    console.log(jsobj);
+    return;
 }
 
