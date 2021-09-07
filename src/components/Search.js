@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 
-import { bingSearchOptions, getSubscriptionKey, bingWebSearch } from "./bingSearch.js";
 import search_icon from "../images/search-icon.svg";
 import "./Components.css";
 
@@ -23,10 +22,7 @@ export default function Search(){
         event.preventDefault();
 
         history.push("/search");    // navigate to search results page
-
-        const searchOptions = bingSearchOptions(event);
-        const apiKey = getSubscriptionKey();
-        bingWebSearch(input, searchOptions, apiKey);
+        console.log(event);
     }
 
     // input tag captures text and changes state
