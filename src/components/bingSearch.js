@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 
 // call APIs
 const SEARCH_API_KEY = process.env.REACT_APP_SEARCH_KEY;
@@ -6,6 +6,7 @@ const BING_ENDPOINT = "https://api.bing.microsoft.com/v7.0/search";
 
 /**
  * customizable options to filter search results on the results page.
+ * TODO: add this functionality to app
  * 
  * @param {*} form
  * 
@@ -27,15 +28,15 @@ export function getSubscriptionKey(){
  * Perform a search constructed from the query, options, and subscription key.
  * 
  */
-export function bingWebSearch(query, options, key) {
 
-    const [jsobj, setJsobj] = useState(null);
+export function bingWebSearch(query) {
+    const key = getSubscriptionKey();
 
-    if (!query.trim().length) return false;
+    if (!query.trim().length || query === null) return false;
 
     // create an XMLHttpRequest object
-    var request = new XMLHttpRequest();
-    var queryurl = BING_ENDPOINT + "?q=" + encodeURIComponent(query) + "&" + options;
+    const request = new XMLHttpRequest();
+    const queryurl = BING_ENDPOINT + "?q=" + encodeURIComponent(query);
 
     // Initialize the request.
     try {
@@ -52,23 +53,7 @@ export function bingWebSearch(query, options, key) {
 
     // Event handler for successful response.
     useEffect(() => {
-        request.addEventListener("load", () => {
-            const json = this.responseText.trim();
-
-            // try to parse results object
-            try {
-                if (json.length) setJsobj(JSON.parse(json));
-            } catch (error){
-                console.log("Invalid JSON response");
-                return;
-            }
-
-            console.log(jsobj);
-            return {jsobj};
-        });
-    });
-    request.addEventListener("load", () => {
-
+        request.addEventListener("load", handleRequest);
     });
 
     // Event handler for errors.
@@ -84,4 +69,19 @@ export function bingWebSearch(query, options, key) {
     // Send the request.
     request.send();
     return false;
+}
+
+function handleRequest(){
+    const json = this.responseText.trim();
+    var jsobj = {};
+
+    // try to parse results object
+    try {
+        if (json.length) jsobj = JSON.parse(json);
+    } catch (error){
+        console.log("Invalid JSON response");
+        return;
+    }
+
+    return {jsobj};
 }

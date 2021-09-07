@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useHistory} from "react-router-dom";
 
+import {useStateValue, actionTypes} from "./StateProvider.js";
 import search_icon from "../images/search-icon.svg";
 import "./Components.css";
 
@@ -13,17 +14,19 @@ import "./Components.css";
  */
 export default function Search(){
     const [input, setInput] = useState("");
+    const [state, dispatch] = useStateValue();
     const history = useHistory();
 
-    /**
-     * TODO: serve data to the user
-     */
     function handleSubmit(event){
         event.preventDefault();
-
         history.push("/search");    // navigate to search results page
-        console.log(event);
+        console.log(state);;
+        dispatch({
+            type: actionTypes.SET_SEARCH_TERM,
+            term: input
+        });
     }
+    
 
     // input tag captures text and changes state
     return (
